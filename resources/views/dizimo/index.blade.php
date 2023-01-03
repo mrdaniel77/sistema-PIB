@@ -34,7 +34,7 @@
             Nenhum registro encontrado!
           </div>
           -->
-          <div class="card-tools" style="margin-top:8px;">
+          <div class="card-tools">
             <form action="">
               <div class="input-group " style="width: 150px; ">
                 <input type="search" id="form1" class="form-control" name="pesquisa">
@@ -46,43 +46,54 @@
               </div>
             </form>
           </div>
+          <div class="card-tools">
+            <form action="">
+               <div class="input-group input-group">
+                  <h4 class="mr-3 mb-0 pt-1">Tipo:</h4>
+                  <select name="filtro" id="filtro" class="form-control" required>
+                     <option value="">Selecione</option>
+                     <option value="Daniel">DanielS</option>
+                     <option value="Nike">NikeS</option>
+                  </select>
+                  <div class="input-group-append">
+                     <button type="submit" class="btn btn-default">
+                     <i class="fas fa-filter"></i>
+                     </button>
+                  </div>
+               </div>
+            </form>
+         </div>
         </div>
-        
         <!-- /.card-header -->
         <div class="card-body table-responsive p-0">
           <table class="table table-hover text-nowrap">
             <tbody>
               <tr>
                 <th scope="col">#</th>
-                
-                <th></th>
-                <th></th>
-                <th></th>
-                <th></th>
+                <th>Dizimista</th>
+                <th>Valor</th>
+                <th>Comprovante</th>
+                <th>Ações</th>
               </tr>
             </tbody>
             <tbody>
-             
-                  
-              
-              <tr>
-                <td> </td>
-                <td></td>
-                <td>  </td>
-                <td> </td>
-                
-                <td>
-                  <a href="/membro/edit/" class="btn btn-warning">
-                    <i class="fas fa-edit"></i>
-                  </a>
-                  <a href="/membro/delete/" class="btn btn-danger">
-                    <i class="fas fa-trash"></i>
-                  </a>
-                 
-                </td>
-              </tr>
+              @foreach ($dizimo as $item)
+                <tr>
+                  <td> {{$item->id}} </td>
+                  <td> {{$item->membro->nome}} </td>
+                  <td> {{$item->valor}} </td>
+                  <td> {{$item->comprovante}} </td>
+                  <td>
+                    <a href="/membro/edit/{{$item->id}}" class="btn btn-warning">
+                      <i class="fas fa-edit"></i>
+                    </a>
+                    <a href="/membro/delete/{{$item->id}}" class="btn btn-danger">
+                      <i class="fas fa-trash"></i>
+                    </a>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
-    
           </table>
         </div>
         <div class="row d-flex justify-content-center" style="margin:10px;">

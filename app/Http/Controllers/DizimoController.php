@@ -9,40 +9,54 @@ use App\Models\Membro;
 
 class DizimoController extends Controller
 {
-    public function index(){
+    public function index(Request $request){
 
-        $membro_id = Membro ::select('nome', 'id')->get();
-        return view('dizimo.index', compact('membro_id'));
+
+        $filtro = $request->filtro;
+        
+        if($filtro != ''){
+            $oi = Membro::where('nome','like', "%".$filtro."%")->paginate(10);
+        }else{
+            $oi = Dizimo::paginate(10);
+        }
+
+
+        $dizimo = Dizimo::with('membro')->get();
+
+        return view('dizimo.index', compact('dizimo','oi'));
+  
     }
     public function create(){
-        $membro_id = Membro ::select('nome', 'id')->get();
-        return view('dizimo.form', compact('membro_id'));
+        $membro = Membro::select('id','nome')->get();
+        return view('dizimo.form', compact('membro'));
     }
     public function edit($id){
+        $dizimo = Dizimo::find($id);
 
-       $dizimo = Dizimo::find($id);
-        return view('dizimo.index', compact('dizimo'));
+        return view('dizimo.form', compact('dizimo'));
+
     }
     public function store(Request $request){
         
         if($request->id != ''){
             $dizimo = Dizimo::find($request->id);
             $dizimo->update($request->all());
-         }else{
+        }else{
             $dizimo = Dizimo::create($request->all());
-         }
+        }
 
-        return view('/dizimo');
+        return redirect('/dizimo');
     }
     public function delete($id){
-        $dizimo = Dizimo::find($id);
+
+       $dizimo = Dizimo::find($id);
+
         if(!empty($dizimo)){
             $dizimo->delete();
-            return view('/dizimo')->with('success','Registro deletado com sucesso !');
-
         }else{
-            return view('/dizimo')->with('danger','Registro não encontrado !');
+            echo"Erro, registro não existe";
         }
         
+        return redirect('/dizimo');
     }
 }

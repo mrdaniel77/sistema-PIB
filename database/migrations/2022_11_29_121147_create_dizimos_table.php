@@ -15,9 +15,10 @@ class CreateDizimosTable extends Migration
     {
         Schema::create('dizimos', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('membro_id');
             $table->string('valor');
             $table->string('comprovante');
+            $table->unsignedBigInteger('membro_id');
+            $table->foreign('membro_id')->references('id')->on('membros')->onDelete('cascade');
             $table->timestamps();
         });
     }

@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
-use App\Http\Controllers\MembroController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Membro;
 
 class Dizimo extends Model
 {
@@ -17,6 +17,6 @@ class Dizimo extends Model
     ];
 
     public function membro(){
-        return $this->hasOne(MembroController::class,'id','membro_id');
+        return $this->hasOne(Membro::class,'id','membro_id');
     }
 }

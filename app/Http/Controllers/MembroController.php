@@ -8,15 +8,26 @@ use App\Models\Membro;
 class MembroController extends Controller
 {
     public function index(Request $request){
-        $pesquisa = $request->pesquisa;
+        
+        
+        $filtro = $request->filtro;
+        
+        if($filtro != ''){
+            $oi = Membro::where('nome','like', "%".$filtro."%")->paginate(10);
+        }else{
+            $oi = Membro::paginate(10);
+        }
+        
+        
+         $pesquisa = $request->pesquisa;
         if($pesquisa != ''){
             $dados = Membro::Where('nome', 'like', "%".$pesquisa."%")->paginate(1000);
         }else{
             $dados = Membro::paginate(10);
-        } 
+        }
        
         
-        return view('membro.index', compact('dados'));
+        return view('membro.index', compact('oi'));
     }
 
     public function create(){

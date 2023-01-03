@@ -34,7 +34,7 @@
             Nenhum registro encontrado!
           </div>
           -->
-          <div class="card-tools" style="margin-top:8px;">
+          <div class="card-tools" >
             <form action="">
               <div class="input-group " style="width: 150px; ">
                 <input type="search" id="form1" class="form-control" name="pesquisa">
@@ -46,6 +46,23 @@
               </div>
             </form>
           </div>
+          <div class="card-tools">
+            <form action="">
+               <div class="input-group input-group">
+                  <h4 class="mr-3 mb-0 pt-1">Tipo:</h4>
+                  <select name="filtro" id="filtro" class="form-control" required>
+                     <option value="">Selecione</option>
+                     <option value="Daniel">Daniel</option>
+                     <option value="Nike">NikeS</option>
+                  </select>
+                  <div class="input-group-append">
+                     <button type="submit" class="btn btn-default">
+                     <i class="fas fa-filter"></i>
+                     </button>
+                  </div>
+               </div>
+            </form>
+         </div>
         </div>
         
         <!-- /.card-header -->
@@ -62,7 +79,7 @@
               </tr>
             </tbody>
             <tbody>
-              @foreach ($dados as $t)
+              @foreach ($oi as $t)
                   
               
               <tr>
